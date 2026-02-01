@@ -1,23 +1,15 @@
 // making sound using button
 
-var numberEvents = document.querySelectorAll(".drum").length;
-for (i = 0; i < numberEvents; i++) {
-  document.querySelectorAll(".drum")[i].addEventListener("click", function () {
-    // changing the clicked button' color
-    // getting the sound depending on the button pressed
-    // if (this.innerHTML === "w") {
-    //   var tom1 = new Audio("./sounds/tom-1.mp3");
-    //   tom1.play();
-    // } else if (this.innerHTML === "a") {
-    //   var tom2 = new Audio("./sounds/tom-2.mp3");
-    //   tom2.play();
-    // }
-    // or we can switch statement
-    var buttontInnerHTML = this.innerHTML;
-    makeSound(buttontInnerHTML);
-    buttonAnimation(buttontInnerHTML);
+// selecting all the drum class buttons
+const drums = document.querySelectorAll(".drum");
+
+drums.forEach((drum) => {
+  drum.addEventListener("click", function () {
+    const drumKey = this.innerHTML;
+    makeSound(drumKey);
+    buttonAnimation(drumKey);
   });
-}
+});
 
 //making sound using keypress
 
@@ -67,6 +59,8 @@ function makeSound(key) {
 
 function buttonAnimation(curentKey) {
   var activeButton = document.querySelector("." + curentKey);
+
+  if (!activeButton) return; // if there is no button corresponding to the key pressed we exit the function
   //   after defining the css property of the pressed class we add it to our letter class
   activeButton.classList.add("pressed");
 
